@@ -1,0 +1,50 @@
+.counter {
+    flex-basis: 25%;
+}
+
+.clear {
+    flex-basis: 25%;
+    border: 0;
+    text-decoration: none;
+    background: none;
+    color: inherit;
+}
+
+.clear:hover {
+    text-decoration: underline;
+}
+
+footer {
+    width: 550px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid gray;
+}
+
+footer button {
+    cursor: pointer;
+    padding: 0 5px;
+    margin: auto 1px;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+
+.buttons button:hover {
+    border: 1px solid #FF697B;
+    border-radius: 3px;
+}
+
+button:active,
+button:focus {
+    outline: none;
+}
+.activeNow {
+    background-color: #FF697B;
+    border-radius: 3px;
+}
+.visually-hidden {
+    visibility: hidden;
+}

@@ -1,0 +1,62 @@
+.item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    position: relative;
+    list-style-type: none;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    padding: 4px;
+    width: 100%;
+    background: #f0f0f0;
+}
+label {
+    min-width: 440px;
+    padding: 10px 10px 10px 50px;
+}
+
+label::before{
+    background-image: url("Praveen-Minimal-Outline-Time.svg");
+}
+.checkInput {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+
+    opacity: 0;
+    height: 35px;
+    width: 35px;
+}
+
+.notDone {
+    background-image: url("Praveen-Minimal-Outline-Time.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center left;
+}
+
+.done {
+    text-decoration: line-through;
+    background-image: url("icons8-checked.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center left;
+}
+
+.delete {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    min-width: 40px;
+    min-height: 40px;
+    border: 0;
+    border-radius: 0;
+    background-image: url("delete.svg");
+    background-size: contain;
+}
+
+.delete:hover {
+    transform: scale(1.1,1.1);
+}
