@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {v4 as uuidv4} from 'uuid';
+
+import Service from "../service";
 import AppHeader from '../app-header'
 import MainInput from '../main-input';
 import TodoList from '../todo-list';
@@ -9,12 +11,23 @@ export default class App extends Component {
 
     state = {
         todoList : [
-            this.createTodoItem('task1'),
-            this.createTodoItem('task2'),
-            this.createTodoItem('task3')
+            // this.createTodoItem('task1'),
+            // this.createTodoItem('task2'),
+            // this.createTodoItem('task3')
         ],
         filter: 'all' //all, active, completed
     };
+
+    componentDidMount() {
+       const test = new Service();
+
+       test.getData()
+           .then(data => {
+               this.setState(
+                   {todoList: data}
+               )
+           })
+}
 
     createTodoItem(text) {
 

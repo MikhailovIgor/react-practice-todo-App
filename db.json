@@ -1,13 +1,23 @@
 {
   "myTodoList": [
     {
-      "id": "13afe4f2-5582-4a68-97de-c25a19eb380a",
-      "value": "hello from server",
+      "id": "1",
+      "label": "first task from  fakeServer",
       "checked": false
     },
     {
-      "id": "3b2fe694-5d6d-476e-8c22-8edd6d58cef1",
-      "value": "now check me",
+      "id": "2",
+      "label": "second task from  fakeServer",
+      "checked": false
+    },
+    {
+      "id": "3",
+      "label": "third task from  fakeServer",
+      "checked": false
+    },
+    {
+      "id": "4",
+      "label": "fourth task from  fakeServer",
       "checked": false
     }
   ]
