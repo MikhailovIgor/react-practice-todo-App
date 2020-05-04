@@ -1,10 +1,13 @@
 import React, {Component} from "react";
 import './todo-list-item.css'
+import Service from "../service";
+
 
 export default class TodoListItem extends Component {
 
     state = {
-        checked: false
+        checked: false,
+
     };
 
     handleChangeStatus = () => {
@@ -14,6 +17,24 @@ export default class TodoListItem extends Component {
            }
        })
     };
+
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     if(prevState.checked !== this.state.checked) {
+    //         console.log(this.state.checked);
+    //         fetch('http://localhost:3001/myTodoList', {
+    //             method: 'PATCH',
+    //             headers: {
+    //                 'Content-Type': 'application/json;charset=utf-8'
+    //             },
+    //             body: JSON.stringify({
+    //
+    //             })
+    //
+    //         })
+    //             .then()
+    //     }
+    //
+    // }
 
     render() {
         const { label, onDeleted, onChanged } = this.props;
