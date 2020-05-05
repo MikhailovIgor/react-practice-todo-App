@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import './todo-list-item.css'
-import Service from "../service";
-
+// import Service from "../service";
 
 export default class TodoListItem extends Component {
 

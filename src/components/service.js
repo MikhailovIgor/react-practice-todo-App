@@ -5,28 +5,31 @@ export default  class Service {
         this.id = id;
     }
 
-    async getData() {
-        const resp = await fetch(this.url);
-        return await resp.json();
+     getData = async () => {
+        const response = await fetch(this.url);
+        return await response.json();
     }
 
-    async deleteData(id) {
-        const resp = await fetch(`${this.url}/${id}`, {
+     deleteData = async (id) => {
+        await fetch(`${this.url}/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
-        })
-            .then(() => console.log('фетч на удаление отработал; удалился елемент с id', id))
+        });
+        // .then(() => console.log('фетч на удаление отработал; удалился елемент с id', id))
     }
 
-    async changeData(id) {
-      const resp = await fetch(`${this.url}/${this.id}`, {
+    async changeData(flag, id) {
+      await fetch(`${this.url}/${id}`, {
           method: 'PATCH',
           headers: {
               'Content-Type': 'application/json;charset=utf-8'
           },
-          body:JSON.strigify()
-      })
+          body: JSON.stringify({
+              checked: flag
+          })
+      });
     }
+
 }

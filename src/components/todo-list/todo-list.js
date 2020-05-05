@@ -1,24 +1,21 @@
 import React from 'react';
 import TodoListItem from "../todo-list-item";
 import './todo-list.css';
-import Service from "../service";
+// import Service from "../service";
 
 export default class TodoList extends React.Component {
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        const { todos } = this.props;
-
-        const service = new Service();
-
-       if(this.props !== prevProps) {
-           console.log('todoList has been changed', todos);
-
-           // service.changeData()
-       }
-
-
-
-    }
+    //
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     const { todos } = this.props;
+    //
+    //     const service = new Service();
+    //
+    //    if(this.props !== prevProps) {
+    //        console.log('todoList has been changed', todos);
+    //
+    //        // service.changeData()
+    //    }
+    // }
 
     render() {
         const { todos, onDeleted, onChanged } = this.props;
