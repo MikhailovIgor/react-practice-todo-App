@@ -14,7 +14,7 @@ export default class App extends React.Component {
         this.state = {
             todoList: [],
             filter: 'all', //all, active, completed
-            //service: null
+            service: null
         };
     }
 
