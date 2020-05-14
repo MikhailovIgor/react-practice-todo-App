@@ -19,7 +19,7 @@ export default class App extends React.Component {
     }
 
     componentDidMount() {
-        console.log("App: componentDidMount");
+        
         const service = new Service();
 
         service.getData()
