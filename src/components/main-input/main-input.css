@@ -1,4 +1,4 @@
-.newTodo input {
+.mainInput {
     width: 550px;
     min-height: 40px;
     padding-left: 20px;
@@ -6,12 +6,12 @@
     outline:none;
 }
 
-input::-webkit-input-placeholder {
+.mainInput::-webkit-input-placeholder {
     color: gray;
     font-style: italic;
     font-size: 18px;
 }
 
-input:hover::-webkit-input-placeholder {
+.mainInput:hover::-webkit-input-placeholder {
     opacity: 50%
 }

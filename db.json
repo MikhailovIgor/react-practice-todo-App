@@ -1,3 +1,49 @@
 {
-  "myTodoList": []
+  "myTodoList": [
+    {
+      "id": "bc6628ae-cf35-4043-8e83-29dbd846d2c5",
+      "label": "3",
+      "checked": false
+    },
+    {
+      "id": "831ad420-deb7-472c-910f-66c75f017811",
+      "label": "1",
+      "checked": true
+    },
+    {
+      "id": "b0dde051-8f81-4dfa-a5ab-248bbfe30313",
+      "label": "4",
+      "checked": false
+    },
+    {
+      "id": "e922f9e5-2637-4c70-a86b-23ce88af1e82",
+      "label": "5",
+      "checked": false
+    },
+    {
+      "id": "3ee99f2a-465c-480d-a690-91891dd22330",
+      "label": "00000",
+      "checked": false
+    },
+    {
+      "id": "54f4931d-181d-456f-bf1e-868dff2b4fba",
+      "label": "11",
+      "checked": false
+    },
+    {
+      "id": "19ed45fd-e0d6-4b7d-8d0d-dbe915e889ae",
+      "label": "222",
+      "checked": false
+    },
+    {
+      "id": "2b9d7ae5-0460-462f-b1bf-d30687cb1a32",
+      "label": "3333",
+      "checked": false
+    },
+    {
+      "id": "df1a2d8c-138c-4567-b898-f67056cec201",
+      "label": "4444",
+      "checked": false
+    }
+  ]
 }

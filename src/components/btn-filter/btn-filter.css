@@ -14,7 +14,7 @@
     text-decoration: underline;
 }
 
-footer {
+.footer {
     width: 550px;
     display: flex;
     justify-content: space-between;
@@ -22,7 +22,7 @@ footer {
     border-bottom: 1px solid gray;
 }
 
-footer button {
+.footer button {
     cursor: pointer;
     padding: 0 5px;
     margin: auto 1px;

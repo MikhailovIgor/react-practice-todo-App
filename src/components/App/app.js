@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {v4 as uuidv4} from 'uuid';
 
 import Service from "../service";
@@ -7,42 +7,41 @@ import MainInput from '../main-input';
 import TodoList from '../todo-list';
 import BtnFilter from '../btn-filter';
 
-export default class App extends Component {
+export default class App extends React.Component {
 
     constructor() {
         super();
         this.state = {
-            todoList : [],
-            filter: 'all' //all, active, completed
+            todoList: [],
+            filter: 'all', //all, active, completed
+            //service: null
         };
-        console.log("App: Constructor");
     }
 
     componentDidMount() {
-        console.log("App: componentDidMount")
-       const service = new Service();
+        console.log("App: componentDidMount");
+        const service = new Service();
 
         service.getData()
-           .then(data => {
-               this.setState(
-                   {todoList: data}
-               )
-           })
+            .then(data => {
+                this.setState(
+                    {
+                        todoList: data,
+                        service
+                    }
+                )
+            })
     }
 
-    createTodoItem(text) {
-
-        return ({
+    createTodoItem = (text) =>
+        ({
             id: uuidv4(),
             label: text,
             checked: false
         });
-    }
 
     addItem = (text) => {
         const newTask = this.createTodoItem(text);
-
-        const url = 'http://localhost:3001/myTodoList'
 
         const updatedTodoList = [
             ...this.state.todoList,
@@ -50,71 +49,52 @@ export default class App extends Component {
         ];
 
         // отправляем на сервер. после успешного сохранения меняем в стейте
-        fetch(`${url}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify(newTask)
-            })
-            .then( () => {
+        this.state.service.addData(newTask)
+            .then(() => {
                     this.setState(
-                        { todoList: updatedTodoList }
+                        {todoList: updatedTodoList}
                     )
                 }
-            )
+            ).catch((err)=> {
+                console.log(err.message())
+        })
     }
 
-    onToggleDone = (id) => {
-
-        const service = new Service();
-        service.changeData(true, id)
+    onToggleChange = (flag, id) => {
+        this.state.service.changeData(!flag, id)
             .then(() => {
-                this.setState(({todoList}) => {
-                    const idx = todoList.findIndex( el => el.id === id);
-                    console.log(id);
-                    const oldItem = todoList[idx];
-                    const newItem = {...oldItem, checked: !oldItem.checked}
+                    this.setState(({todoList}) => {
+                        const idx = todoList.findIndex(el => el.id === id);
+                        const oldItem = todoList[idx];
+                        const newItem = {...oldItem, checked: !oldItem.checked}
 
-                    const updatedTodoList = [
-                        ...todoList.slice(0, idx),
-                        newItem,
-                        ...todoList.slice(idx + 1)
-                    ];
+                        const updatedTodoList = todoList;
+                        updatedTodoList.splice(idx, 1, {...oldItem, checked: !oldItem.checked})
 
-                    //вариант когда есть id
+                        //вариант когда есть id:
 
-                    // const updatedTodoList2 = todoList.map(task=>{
-                    //     if(task.id !== id){
-                    //         return task;
-                    //     }
-                    //
-                    //     return {...task, checked: !oldItem.checked};
-                    // });
+                                    // const updatedTodoList2 = todoList.map( task => {
+                                    //     if(task.id !== id) {
+                                    //         return task;
+                                    //     }
+                                    //     return {...task, checked: !oldItem.checked};
+                                    // });
 
-                    return {
-                        todoList: updatedTodoList
-                    };
-                })
-            }
-        )
+                        return {
+                            todoList: updatedTodoList
+                        };
+                    })
+                }
+            )
     };
 
     deleteItem = (id) => {
 
-        const service = new Service();
-
-        service.deleteData(id).then(
-            this.setState(({ todoList }) => {
-                const idx = todoList.findIndex( el => el.id === id);
-                const updatedTodoList = [
-                    ...todoList.slice(0, idx),
-                    ...todoList.slice(idx + 1)
-                ];
-                console.log(updatedTodoList);
+        this.state.service.deleteData(id).then(
+            this.setState(({todoList}) => {
 
                 return {
-                    todoList: updatedTodoList
+                    todoList: todoList.filter(({ id: deletedId }) => deletedId !== id )
                 }
             })
         )
@@ -122,42 +102,40 @@ export default class App extends Component {
     };
 
     filterInFooter(items, filter) {
-        switch(filter) {
-            case 'all':
-                return items;
+        switch (filter) {
             case 'active':
                 return items.filter((item) => !item.checked);
             case 'completed':
-                return  items.filter((item) => item.checked);
+                return items.filter((item) => item.checked);
             default:
                 return items;
         }
     };
-
-    onFilterChange = (filter) => {
-        this.setState({ filter })
-    };
+    //
+    // onFilterChange = (filter) => {
+    //     this.setState({filter})
+    // };
 
     render() {
         console.log("App: render")
         const {todoList, filter} = this.state;
-        const todoCount = this.state.todoList.filter(el => el.checked === false).length;
+        const todoCount = this.state.todoList.filter(({ checked }) => !checked).length;
 
         const visibleItems = this.filterInFooter(todoList, filter);
 
         return (
             <>
-                <AppHeader />
-                <MainInput onItemAdded={this.addItem} />
+                <AppHeader/>
+                <MainInput onItemAdded={this.addItem}/>
                 <TodoList
-                    todos = { visibleItems }
+                    todos={visibleItems}
                     onDeleted={this.deleteItem}
-                    onChanged={this.onToggleDone}
+                    onChanged={this.onToggleChange}
                 />
                 <BtnFilter
                     count={todoCount}
                     filter={filter}
-                    onFilterChange={this.onFilterChange}
+                    onFilterChange={ filter => this.setState({filter}) }
                 />
             </>
         );

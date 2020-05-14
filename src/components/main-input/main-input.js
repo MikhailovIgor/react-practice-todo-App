@@ -1,39 +1,68 @@
-import React, {Component} from "react";
+import React, {useState} from "react";
 import './main-input.css';
 
-export default class MainInput extends Component {
+const MainInput = ({ onItemAdded }) => {
 
-    state = {
-        label: ''
-    }
+    const [label, setLabel] = useState('');
 
-    onLabelChange = (event) => {
-       this.setState({
-           label: event.target.value
-       });
-    };
+    return (
+        <form className='newTodo'
+              onSubmit={(e) => {
+                  e.preventDefault();
+                  onItemAdded(label);
+                  setLabel('');
+              }}>
+            <input className='mainInput'
+                   type='text'
+                   autoFocus
+                   placeholder='Whats needs to be done?'
+                   onChange={({target: {value}}) => {
+                       setLabel(value);
+                   }}
+                   value={label}>
+            </input>
+        </form>
+    );
+}
 
-    onSubmit = (e) => {
-        e.preventDefault();
-        this.props.onItemAdded(this.state.label);
-        this.setState({
-            label: ''
-        });
-    };
+export default MainInput;
 
-   render() {
-       return (
-           <form className='newTodo'
-           onSubmit={this.onSubmit}>
-               <input className='mainInput'
-                      type="text"
-                      autoFocus={true}
-                      placeholder="Whats needs to be done?"
-                      onChange={this.onLabelChange}
-                      value={this.state.label}
-               />
-           </form>
-       )
-   }
-};
-// preventDefault()
+//  export default class MainInput extends Component {
+//
+//     state = {
+//         label: ''
+//     }
+//
+//     // onLabelChange = ({ target: { value } }) => {
+//     //    this.setState({
+//     //        label: value
+//     //    });
+//     // };
+//
+//     onSubmit = (e) => {
+//         e.preventDefault();
+//         this.props.onItemAdded(this.state.label);
+//         this.setState({
+//             label: ''
+//         });
+//     };
+//
+//    render() {
+//        return (
+//            <form className='newTodo'
+//            onSubmit={this.onSubmit}>
+//                <input className='mainInput'
+//                       type="text"
+//                       autoFocus
+//                       placeholder="Whats needs to be done?"
+//                       onChange={({ target: { value } }) => {
+//                           this.setState({
+//                               label: value
+//                           });
+//                       }}
+//                       value={this.state.label}
+//                />
+//            </form>
+//        )
+//    }
+// };
